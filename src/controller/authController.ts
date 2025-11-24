@@ -211,19 +211,19 @@ export const handelRefreshToken = async (req:Request, res:Response) => {
         const { token } = req.body
 
         if (!token) {
-            res.status(400).json({message:"Token is empty"})
+            return res.status(400).json({message:"Token is empty"})
         }
 
         const payload = jwt.verify(token, JWT_REFRESH_SECRET)
-        const user = await User.findById(payload._id)
+        const user = await User.findById(payload.sub)
         if (!user) {
-            res.status(400).json({message:"Refresh Token Invalid"})
+            return res.status(400).json({message:"Refresh Token Invalid"})
         }
         const accessToken = await signAccessToken(user)
-        res.status(200).json({accessToken})
+        return res.status(200).json({accessToken})
 
     }catch (e) {
         console.error(e)
-        res.status(500).json({message:"Invalid Refresh Token"})
+        return res.status(500).json({message:"Invalid Refresh Token"})
     }
 }
