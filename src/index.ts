@@ -14,7 +14,7 @@ const app = express();
 
 //Middlewares
 app.use(cors({
-    origin: ["http://localhost:5173", "https://smart-blog-web-blue.vercel.app/login"]
+    origin: ["http://localhost:5173", "https://smart-blog-web-blue.vercel.app"]
 }))
 app.use(express.urlencoded({
     extended: true
