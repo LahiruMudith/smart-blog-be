@@ -23,6 +23,9 @@ app.use(express.json())
 app.use("/api/v1/auth", authRouter)
 app.use("/api/v1/post", postRouter)
 app.use("/api/v1/ai", aiRouter)
+app.get("/", (req, res) => {
+    res.send("Backend is working")
+})
 
 mongoose
     .connect(mongoUrl)
